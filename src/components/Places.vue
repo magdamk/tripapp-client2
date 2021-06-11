@@ -6,6 +6,7 @@
             <p v-if="place.showWeather">Słonecznie</p>
             <button @click ="place.showComments=!place.showComments">Opinie ({{place.comments.length}})</button>
             <div v-show="place.showComments">
+            <CommentForm :id="place.id" @add-comment="addComment"/>
             <CommentList :comments="place.comments"/>
             </div>
             <hr/>
@@ -15,16 +16,17 @@
 <script>
 import Place from "@/components/Place.vue";
 import CommentList from "@/components/CommentList.vue";
+import CommentForm from "@/components/CommentForm.vue";
 export default {
     name: "Places",
-    components: {Place, CommentList},
+    components: {Place, CommentList, CommentForm},
     data() {
         return {
             places: [
             {
                 id: "001",
                 name: "Zamek Królewski w Warszawie",
-                photo:"https://duckduckgo.com/i/2b942462.jpg",
+                photo:"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.lBmk_8fsyQsS7d7rBZkKcgHaET%26pid%3DApi&f=1",
                 description: "Zamek Królewski w Warszawie – barokowo-klasycystyczny zamek królewski znajdujący się w Warszawie przy placu Zamkowym 4.",
                 costToVisit: 30,
                 longitude: 52.247778,
@@ -58,7 +60,7 @@ export default {
             {
                 id: "002",
                 name: "Łazienki Królewskie w Warszawie",
-                photo:"https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.lBmk_8fsyQsS7d7rBZkKcgHaET%26pid%3DApi&f=1",
+                photo:"https://duckduckgo.com/i/2b942462.jpg",
                 description: "Łazienki Królewskie – zespół pałacowo-ogrodowy w Warszawie założony w XVIII wieku przez Stanisława Augusta Poniatowskiego. Nazwa pochodzi od barokowego pawilonu Łaźni, wzniesionego w latach 80. XVII wieku przez Stanisława Herakliusza Lubomirskiego i przebudowanego przez Stanisława Augusta Poniatowskiego na pałac Na Wyspie.",
                 costToVisit: 0,
                 longitude: 52.214444,
@@ -66,27 +68,7 @@ export default {
                 showWeather: false,
                 showComments: false,
                 comments:[
-                    {
-                        id: "101",
-                        title: "Super!",
-                        nick: "Jacek",
-                        content: "Super było, jeszcze tu wrócę.",
-                        rate: 5
-                    },
-                    {
-                        id: "102",
-                        title: "Taki sobie",
-                        nick: "Staś",
-                        content: "Trochę nudno, tłum ludzi, ale ładne kwiatki",
-                        rate: 4
-                    },
-                    {
-                        id: "103",
-                        title: "Nuda",
-                        nick: "Ania",
-                        content: "Tłoczno, pełno dzieci, brudno. Nie polecam.",
-                        rate: 2
-                    }
+                   
                 ]
             }
             ]
@@ -94,6 +76,13 @@ export default {
     },
     
     methods:{
+      addComment(comment){
+        //  console.log(comment.placeId.length);
+          let i = this.places.findIndex(function(element) {if (element.id===comment.placeId) return true 
+                    else return false})
+          console.log(i)
+          this.places[i].comments.push(comment.comment)
+        },  
       revealWeather(){
          
       }

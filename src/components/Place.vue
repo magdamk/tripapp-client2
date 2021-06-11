@@ -1,7 +1,7 @@
 <template lang="pl">
     <div>
         <img v-bind:alt="place.name" v-bind:src="place.photo" style="height:200px;"/>
-    <h2>{{name}}</h2>
+    <h2>{{place.name}}</h2>
     <div>
       <p><strong>Opis: </strong>{{place.description}}</p>
       <p><strong>Współrzędne: </strong>{{geoposition}}</p>
@@ -9,16 +9,23 @@
       <p v-else>Za darmo!</p>
       
     </div>
+    
     </div>
 </template>
 <script>
+
 export default {
     name: "Place",
+    components: {},
+    emits:['add-comment'],
     props: {
         place: {
             type: Object,
             required: true
         }
+    },
+    methods:{
+       
     },
     computed: {
         geoposition(){
