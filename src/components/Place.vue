@@ -7,8 +7,7 @@
       <p><strong>Współrzędne: </strong>{{geoposition}}</p>
       <p v-if="place.costToVisit"><strong>Koszt: </strong>{{place.costToVisit}} zł</p>
       <p v-else>Za darmo!</p>
-      <button v-on:click="revealWeather()">Pogoda</button>
-      <p v-if="place.showWeather">Słonecznie</p>
+      
     </div>
     </div>
 </template>
@@ -26,12 +25,7 @@ export default {
             return this.place.longitude + ', ' + this.place.latitude;
         }
     },
-    methods:{
-      revealWeather(){
-       this.showWeather = !this.showWeather;
-     
-      }
-    },
+    
 }
 </script>
 <style scoped lang="pl">

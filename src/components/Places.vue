@@ -1,16 +1,23 @@
 <template lang="pl">
     <div>
         <div v-for="place in places" v-bind:key="place.id">
-        <Place :place="place" />
-    <hr/>
-  </div>
+            <Place :place="place" />
+            <button @click ="place.showWeather=!place.showWeather">Pogoda</button>
+            <p v-if="place.showWeather">Słonecznie</p>
+            <button @click ="place.showComments=!place.showComments">Opinie ({{place.comments.length}})</button>
+            <div v-show="place.showComments">
+            <CommentList :comments="place.comments"/>
+            </div>
+            <hr/>
+        </div>
     </div>
 </template>
 <script>
 import Place from "@/components/Place.vue";
+import CommentList from "@/components/CommentList.vue";
 export default {
     name: "Places",
-    components: {Place},
+    components: {Place, CommentList},
     data() {
         return {
             places: [
@@ -22,7 +29,31 @@ export default {
                 costToVisit: 30,
                 longitude: 52.247778,
                 latitude: 21.01416,
-                showWeather: false
+                showWeather: false,
+                showComments: false,
+                comments:[
+                    {
+                        id: "101",
+                        title: "Super!",
+                        nick: "Jacek",
+                        content: "Super było, jeszcze tu wrócę.",
+                        rate: 5
+                    },
+                    {
+                        id: "102",
+                        title: "Taki sobie",
+                        nick: "Staś",
+                        content: "Trochę nudno, tłum ludzi, ale ładne żyrandole",
+                        rate: 3
+                    },
+                    {
+                        id: "103",
+                        title: "Nuda",
+                        nick: "Ania",
+                        content: "Duszno, tłoczno, poza tym to atrapa, a nie stary zamek. Nie polecam.",
+                        rate: 1
+                    }
+                ]
             },
             {
                 id: "002",
@@ -32,12 +63,44 @@ export default {
                 costToVisit: 0,
                 longitude: 52.214444,
                 latitude: 21.031667,
-                showWeather: false
+                showWeather: false,
+                showComments: false,
+                comments:[
+                    {
+                        id: "101",
+                        title: "Super!",
+                        nick: "Jacek",
+                        content: "Super było, jeszcze tu wrócę.",
+                        rate: 5
+                    },
+                    {
+                        id: "102",
+                        title: "Taki sobie",
+                        nick: "Staś",
+                        content: "Trochę nudno, tłum ludzi, ale ładne kwiatki",
+                        rate: 4
+                    },
+                    {
+                        id: "103",
+                        title: "Nuda",
+                        nick: "Ania",
+                        content: "Tłoczno, pełno dzieci, brudno. Nie polecam.",
+                        rate: 2
+                    }
+                ]
             }
             ]
         }
+    },
+    
+    methods:{
+      revealWeather(){
+         
+      }
+    },
+   
     }
-}
+
 </script>
 <style scoped lang="pl">
     
