@@ -1,25 +1,19 @@
 <template lang="pl">
     <div>
         <div v-for="place in places" v-bind:key="place.id">
-            <Place :place="place" />
-            <button @click ="place.showWeather=!place.showWeather">Pogoda</button>
-            <p v-if="place.showWeather">Słonecznie</p>
-            <button @click ="place.showComments=!place.showComments">Opinie ({{place.comments.length}})</button>
-            <div v-show="place.showComments">
-            <CommentForm :id="place.id" @add-comment="addComment"/>
-            <CommentList :comments="place.comments"/>
-            </div>
+            <Place :place="place" @add-comment="addComment" />
+           
+           
             <hr/>
         </div>
     </div>
 </template>
 <script>
 import Place from "@/components/Place.vue";
-import CommentList from "@/components/CommentList.vue";
-import CommentForm from "@/components/CommentForm.vue";
+
 export default {
     name: "Places",
-    components: {Place, CommentList, CommentForm},
+    components: {Place},
     data() {
         return {
             places: [
@@ -31,8 +25,7 @@ export default {
                 costToVisit: 30,
                 longitude: 52.247778,
                 latitude: 21.01416,
-                showWeather: false,
-                showComments: false,
+                
                 comments:[
                     {
                         id: "101",
@@ -46,14 +39,14 @@ export default {
                         title: "Taki sobie",
                         nick: "Staś",
                         content: "Trochę nudno, tłum ludzi, ale ładne żyrandole",
-                        rate: 3
+                        rate: 4
                     },
                     {
                         id: "103",
                         title: "Nuda",
                         nick: "Ania",
                         content: "Duszno, tłoczno, poza tym to atrapa, a nie stary zamek. Nie polecam.",
-                        rate: 1
+                        rate: 3
                     }
                 ]
             },
@@ -77,11 +70,9 @@ export default {
     
     methods:{
       addComment(comment){
-        //  console.log(comment.placeId.length);
-          let i = this.places.findIndex(function(element) {if (element.id===comment.placeId) return true 
+        let i = this.places.findIndex(function(element) {if (element.id===comment.placeId) return true 
                     else return false})
-          console.log(i)
-          this.places[i].comments.push(comment.comment)
+        this.places[i].comments.push(comment.comment)
         },  
       revealWeather(){
          

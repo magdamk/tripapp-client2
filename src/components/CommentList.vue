@@ -1,10 +1,10 @@
 <template lang="pl">
     <div>
-    <p><strong>Średnia ocen: </strong>{{average}}</p>
+    <p><strong>Średnia ocen: </strong><span :class="{'good': average>3, 'bad':average<3, 'neutral':average===3}">{{average}}/5</span></p>
         
         <div v-for="comment in comments" v-bind:key="comment.id">
             <Comment :comment="comment" />
-            <hr/>
+           
         </div>
     </div>
 </template>
@@ -29,12 +29,20 @@ export default {
                 sum += arr[i].rate;
                 i++;
             }
-            return (sum/this.comments.length).toFixed(2);
+            return (sum/this.comments.length).toFixed(0);
             } else return "Brak opinii";
         }
     },
 }
 </script>
-<style scoped lang="pl">
-    
+<style scoped>
+    .good{
+    background-color:lightgreen;
+  }  
+.bad {
+    background-color:red;
+  }
+.neutral{
+    background-color:yellow;
+  }
 </style>

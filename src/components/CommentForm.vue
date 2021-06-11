@@ -3,7 +3,7 @@
         <form id="form" @submit.prevent="onSubmit">
             <h3>Zostaw opinię:</h3>
             <div>
-                <label for="title">Tytuł: </label>
+                <label for="title">Tytuł:   </label>
                 <input id="title" v-model.trim="title">
             </div>
             <div>
@@ -12,7 +12,7 @@
             </div>
             <div>
                 <label for="content">Treść: </label>
-                <input id="content" v-model.trim="content">
+                <textarea id="content" type="text" size="100" v-model.trim="content"></textarea>
             </div>
             <div>
                 <label for="rate">Ocena: </label>
@@ -52,7 +52,6 @@ export default {
                 alert('Wypełnij wszystkie pola formularza.')
             }
             else {
-                console.log(this.id);
             this.$emit('add-comment', {
                 comment: {
                 title: this.title,
@@ -73,6 +72,7 @@ export default {
 </script>
 <style scoped>
 #form {
+    text-align: left;
     border: 1px solid gray;
     margin: 10px;
     padding: 10px;
