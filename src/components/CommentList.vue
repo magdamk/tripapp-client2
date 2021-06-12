@@ -1,6 +1,6 @@
 <template lang="pl">
     <div>
-    <p><strong>Średnia ocen: </strong><span :class="{'good': average>3, 'bad':average<3, 'neutral':average===3}">{{average}}/5</span></p>
+    <p><strong>Średnia ocen: </strong><span :class="{'good': average>3, 'bad':average<3, 'neutral':average==3}">{{average}}/5</span></p>
         
         <div v-for="comment in comments" v-bind:key="comment.id">
             <Comment :comment="comment" />

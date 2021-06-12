@@ -1,18 +1,31 @@
 <template>
   <div class="home">
-  <Places/>
+  <h1>Wycieczki jednodniowe</h1>
+  <p>Opis aplikacji</p>
+  
   
   </div>
+  <br/>
+  <hr/>
+  <footer class="footer">
+  <router-link :to="{ name: 'Login'}">Administrator</router-link>
+  </footer>
+  <router-view/>
 </template>
 
 <script>
 // @ is an alias to /src
-import Places from "@/components/Places.vue";
+//import Places from "@/components/Places.vue";
 
 export default {
   name: "Home",
   components: {
-    Places
+   
   }
 }
 </script>
+<style>
+.footer{
+  text-align: right;
+}
+</style>

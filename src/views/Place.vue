@@ -1,5 +1,5 @@
 <template lang="pl">
-    <div>
+    <div v-if="place">
         <img v-bind:alt="place.name" v-bind:src="place.photo" style="height:200px;"/>
     <h2>{{place.name}}</h2>
     <div>
@@ -15,31 +15,35 @@
             <CommentList :comments="place.comments"/>
        </div>
     </div>
-    
     </div>
+     <div v-else>Nie znaleziono miejsca o takim indeksie.</div>
 </template>
 <script>
 import CommentList from "@/components/CommentList.vue";
 import CommentForm from "@/components/CommentForm.vue";
+import placeService from "@/services/placeService.js";
 export default {
     name: "Place",
     components: {CommentList, CommentForm},
-    emits:['add-comment'],
-    props: {
-        place: {
-            type: Object,
-            required: true
-        }
-    },
+   // emits:['add-comment'],
     data(){
         return {
+            place: null,
             showWeather: false,
             showComments: false,
         }
     },
+    created(){
+        this.getPlaceById(this.$route.params.place)
+    },
     methods:{
+       getPlaceById(id){
+           if (id) {
+           this.place = placeService.getPlaceById(id)
+           }
+       }, 
        addComment(comment){
-           this.$emit('add-comment',comment)
+          this.place.comments.push(comment.comment);
        }
     },
     computed: {
@@ -58,4 +62,8 @@ export default {
     width:100px;
     text-align:center;
 } 
+img {
+	max-width: 100%;
+	height: auto;
+}
 </style>
