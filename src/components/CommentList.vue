@@ -24,12 +24,12 @@ export default {
             let sum = 0;
             let i = 0;
             if (this.comments.length){
-            let arr = this.comments;
-            while (i < arr.length) {
-                sum += arr[i].rate;
-                i++;
-            }
-            return (sum/this.comments.length).toFixed(0);
+                let arr = this.comments;
+                while (i < arr.length) {
+                    sum += arr[i].rate;
+                    i++;
+                }
+                return (sum/this.comments.length).toFixed(0);
             } else return "Brak opinii";
         }
     },

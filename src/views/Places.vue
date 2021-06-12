@@ -3,15 +3,17 @@
         <table>
             <thead>
                 <tr>
+                    <th></th>
                     <th>Miejsce</th>
                     <th>Akcja</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="place in places" v-bind:key="place.id">
+                    <td><img v-bind:alt="place.name" v-bind:src="place.photo" style="height:100px;"/></td>
                     <td @click="goToPlace(place.id)">{{place.name}}</td>
                     <td>
-                        <button @click="goToPlace(place.id)">Pokaż</button>
+                        <button @click="goToPlace(place.id)" class="waves-effect waves-light btn-small">Pokaż</button>
                     </td>
                 </tr>
             </tbody>
@@ -19,43 +21,35 @@
     </div>
 </template>
 <script>
-//import Place from "@/components/Place.vue";
 import placeService from "@/services/placeService.js";
-
 export default {
     name: "Places",
-    components: {
-        //Place
-        },
+    components: {},
     data() {
         return {
             places: []
-            
         }
     },
     created() {
         this.getAllPlaces()
     },
     methods:{
-        getAllPlaces(){
+        getAllPlaces() {
             this.places = placeService.getAllPlaces()
         },
-        goToPlace(id){
+        goToPlace(id) {
             this.$router.push('/places/' + id)
         },
-      addComment(comment){
-        let i = this.places.findIndex(function(element) {if (element.id===comment.placeId) return true 
-                    else return false})
-        this.places[i].comments.push(comment.comment)
+        addComment(comment) {
+            let i = this.places.findIndex(function(element) {
+                if (element.id===comment.placeId) return true 
+                    else return false
+                })
+            this.places[i].comments.push(comment.comment)
         },  
-      revealWeather(){
-         
-      }
+        
     },
-   
-    }
-
+}
 </script>
 <style scoped lang="pl">
-    
 </style>

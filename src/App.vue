@@ -1,10 +1,16 @@
 <template>
-  <div id="nav">
-    <router-link :to="{ name: 'Home'}">Home</router-link> |
-    <router-link :to="{ name: 'Places'}">Lista atrakcji</router-link> |
-    <router-link :to="{ name: 'About'}">About</router-link>
+<nav>
+  <div class="nav-wrapper">
+  <a href="#" class="brand-logo right">Logo</a>
+  <ul  id="nav-mobile" class="left">
+    <li><router-link :to="{ name: 'Home'}">Home</router-link></li>
+    <li><router-link :to="{ name: 'Places'}">Lista atrakcji</router-link></li>
+    <li><router-link :to="{ name: 'About'}">About</router-link></li>
+  </ul>
   </div>
+</nav>
   <router-view />
+ 
 </template>
 
 <style>

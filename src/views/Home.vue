@@ -5,9 +5,9 @@
   
   
   </div>
-  <br/>
-  <hr/>
-  <footer class="footer">
+  
+  
+  <footer class="page-footer">
   <router-link :to="{ name: 'Login'}">Administrator</router-link>
   </footer>
   <router-view/>
@@ -20,7 +20,6 @@
 export default {
   name: "Home",
   components: {
-   
   }
 }
 </script>

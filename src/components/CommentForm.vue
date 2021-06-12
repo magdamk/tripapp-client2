@@ -2,29 +2,30 @@
     <div>
         <form id="form" @submit.prevent="onSubmit">
             <h3>Zostaw opinię:</h3>
-            <div>
+            <div class="row">
+            <div class="input-field inline">
                 <label for="title">Tytuł:   </label>
-                <input id="title" v-model.trim="title">
+                <input type="text" id="title" class="input-field" v-model.trim="title">
             </div>
-            <div>
+            <div class="input-field inline">
                 <label for="nick">Autor: </label>
-                <input id="nick" v-model.trim="nick">
+                <input type="text" id="nick" v-model.trim="nick">
             </div>
+            <div class="input-field inline">
+             <label for="rate">Ocena: </label>
+                <input type="number" id="rate" v-model.number="rate" min="1" max="5" style="width:70px">
+            </div>
+            </div>
+            <div class="input-field">
+                <label for="content">Opinia: </label>
+                <textarea id="content" type="text" v-model.trim="content" style="width:490px" placeholder="Twoje opinia"></textarea>
+            </div>
+            <div class="row">
+            
             <div>
-                <label for="content">Treść: </label>
-                <textarea id="content" type="text" size="100" v-model.trim="content"></textarea>
+            <button class="btn waves-effect waves-light" type="submit">Wyślij<i class="material-icons right">send</i></button>
             </div>
-            <div>
-                <label for="rate">Ocena: </label>
-                <select id="rate" v-model.number="rate">
-                    <option>5</option>
-                    <option>4</option>
-                    <option>3</option>
-                    <option>2</option>
-                    <option>1</option>
-                </select>
             </div>
-            <button class="button" type="submit">Wyślij</button>
         </form>
     </div>
 </template>
@@ -38,7 +39,7 @@ export default {
             required:true
         }
     },
-    data(){
+    data() {
         return {
             title: null,
             nick: null,
@@ -48,7 +49,7 @@ export default {
     },
     methods:{
         onSubmit(){
-            if (!this.title || !this.nick || !this.content || !this.rate){
+            if (!this.title || !this.nick || !this.content || !this.rate) {
                 alert('Wypełnij wszystkie pola formularza.')
             }
             else {
