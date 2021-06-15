@@ -1,15 +1,27 @@
-import places from "../data/places.json";
-
+/* eslint-disable prettier/prettier */
+import axios from 'axios'
+//import places from "../data/places.json";
 export class PlaceService {
-    getAllPlaces() {
-        return places
+    async getAllPlaces() {
+        const places = await axios.get("/api/places/")
+            //  console.log(places.data);
+        return places.data;
     }
-    getPlaceById(id) {
-        const place = places.find(place => place.id === id)
-        return place || null
+    async getPlaceById(id) {
+        const place = await axios.get("/api/places/" + id)
+            //console.log('service', place.data);
+        return place.data || null;
+    }
+    async getCommentsForPlace(id) {
+        const commentsForPlace = await axios.get("/api/comments/" + id)
+        return commentsForPlace.data
+    }
+    async createCommentforPlace(id, params) {
+        const addedComment = axios.post("/api/comments/" + id, params)
+        return addedComment
     }
 }
 
-const placeService = new PlaceService()
+const placeService = new PlaceService();
 
-export default placeService
+export default placeService;

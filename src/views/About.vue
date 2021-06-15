@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 <template>
   <div class="about">
     <h1>Aplikacja zaliczeniowa</h1>

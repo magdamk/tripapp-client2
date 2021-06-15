@@ -10,27 +10,27 @@
 </template>
 <script>
 export default {
-    name: "Comment",
-    props: {
-        comment: { 
-            type: Object, 
-            required : true
-        }
-    }
-}
+  name: "Comment",
+  props: {
+    comment: {
+      type: Object,
+      required: true,
+    },
+  },
+};
 </script>
 <style>
-.comment{
-    border: 1px solid gray;
-    border-radius: 1%;
+.comment {
+  border: 1px solid gray;
+  border-radius: 1%;
 }
-.good{
-    background-color:lightgreen;
-  }  
+.good {
+  background-color: lightgreen;
+}
 .bad {
-    background-color:red;
-  }
-.neutral{
-    background-color:yellow;
-  }
+  background-color: red;
+}
+.neutral {
+  background-color: yellow;
+}
 </style>

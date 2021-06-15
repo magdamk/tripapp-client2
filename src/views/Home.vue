@@ -1,16 +1,13 @@
 <template>
   <div class="home">
-  <h1>Wycieczki jednodniowe</h1>
-  <p>Opis aplikacji</p>
-  
-  
+    <h1>Wycieczki jednodniowe</h1>
+    <p>Opis aplikacji</p>
   </div>
-  
-  
+
   <footer class="page-footer">
-  <router-link :to="{ name: 'Login'}">Administrator</router-link>
+    <router-link :to="{ name: 'Login' }">Administrator</router-link>
   </footer>
-  <router-view/>
+  <router-view />
 </template>
 
 <script>
@@ -19,12 +16,11 @@
 
 export default {
   name: "Home",
-  components: {
-  }
-}
+  components: {},
+};
 </script>
 <style>
-.footer{
+.footer {
   text-align: right;
 }
 </style>

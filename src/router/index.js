@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/Home.vue";
 
@@ -47,8 +48,8 @@ const routes = [{
         path: "/:catchAll(.*)",
         name: "NotFound",
         component: () =>
-            import ( /* webpackChunkName: "about" */ "@/views/NotFound.vue")
-    }
+            import ( /* webpackChunkName: "about" */ "@/views/NotFound.vue"),
+    },
 ];
 
 const router = createRouter({
