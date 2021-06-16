@@ -19,6 +19,10 @@ export class PlaceService {
         const addedComment = axios.post("/api/comments/" + id, params)
         return addedComment
     }
+    async getPhotosForPlace(id) {
+        const photosForPlace = await axios.get("/api/photos/" + id)
+        return photosForPlace.data
+    }
 }
 
 const placeService = new PlaceService();

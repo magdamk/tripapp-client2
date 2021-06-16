@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 <template lang="pl">
-    <div>
-        
+    <p v-show="!photos.length">Brak zdjęć</p>
+    <div v-for="photo in photos" v-bind:key="photo._id">
+        <img src="photo.url" style="height:200px;"/>
     </div>
 </template>
 <script>
@@ -9,14 +10,11 @@
 export default {
   name: "Photos",
   props: {
-    placeId: {
-      type: String,
+    photos: {
+      type: Array,
       required: true,
-    },
-    data() {
-      photos = null;
-    },
-  },
-};
+    }
+  }
+  }
 </script>
 <style scooped></style>
