@@ -18,11 +18,11 @@
       </div>
       <div class="input-field inline">
          <label for="costToVisit">Maksymalna cena</label>
-        <input type="number" id="costToVisit" class="input-field" v-model.number="costToVisit" @keyup="onSubmit" min=0/>
+        <input type="number" id="costToVisit" class="input-field" v-model.number="costToVisit" @keyup="onSubmit" min="0"/>
       </div>
        <div class="input-field inline">
          <label for="av">Minimalna ocena</label>
-        <input type="number" id="av" class="input-field" v-model.number="av" @keyup="showByRate" min=0 max=5/>
+        <input type="number" id="av" class="input-field" v-model.number="av" @keyup="showByRate" min="0" max="5"/>
       </div>
       
          <div>
@@ -41,7 +41,7 @@
             </thead>
             <tbody>
                 <tr v-for="(place,index) in places" v-bind:key="place._id" v-show="place.average >= av">
-                    <td><!-- <img v-bind:alt="place.name" v-bind:src="place.photo" style="height:100px;"/---></td>
+                    <td><img v-bind:alt="'photo of '+ place.name" v-bind:src="place.photoMain" style="height:100px;"/></td>
                     <td @click="goToPlace(place._id)" >{{place.name}}</td>
                     <td>
                         <button @click="goToPlace(place._id)" class="waves-effect waves-light btn-small">Pokaż</button>

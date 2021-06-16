@@ -1,7 +1,7 @@
 <template lang="pl">
   <br/>
     <div v-if="place">
-        <!--img v-bind:alt="place.name" v-bind:src="place.photo" style="height:200px;"/-->
+        <img v-bind:alt="place.name" v-bind:src="place.photoMain" style="height:200px;"/>
         <h2>{{place.name}}</h2>
             <p><strong>Opis: </strong>{{place.description}}</p>
             <p><strong>Miejscowość: </strong>{{place.city}}</p>
