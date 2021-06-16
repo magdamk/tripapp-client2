@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 <template lang="pl">
     <div>
-        <form id="form2" method="post" @submit.prevent="onSubmit">
+        <form id="form2" @submit.prevent="onSubmit">
             <h3>Zostaw opinię:</h3>
             <div class="row">
             <div class="input-field inline">
@@ -15,6 +15,10 @@
             <div class="input-field inline">
              <label for="rate">Ocena: </label>
                 <input type="number" id="rate" v-model.number="rate" min="1" max="5">
+            </div>
+            <div class="input-field inline">
+              <label for="dateOfVisit">Data wizyty: </label>
+              <input type="date" id="dateOfVisit" v-model.date ="dateOfVisit" v-bind="{max : setNow()}">
             </div>
             </div>
             <div class="input-field">
@@ -43,28 +47,38 @@ export default {
   },
   data() {
     return {
+     
       title: null,
       nick: null,
       content: null,
       rate: null,
+      dateOfVisit: null
     };
   },
   methods: {
+    setNow(){
+      return new Date().toISOString().split("T")[0];
+
+    },
    async  onSubmit() {
-      if (!this.title || !this.nick || !this.content || !this.rate) {
-        alert("Wypełnij wszystkie pola formularza.");
-      } else {
+      if (!this.title || !this.nick || !this.content || !this.rate || !this.dateOfVisit) {
+        alert("Wypełnij poprawnie wszystkie pola formularza.");
+      } 
+      else
+       {
         const params = {
             title: this.title,
             nick: this.nick,
             content: this.content,
-            rate: this.rate
+            rate: this.rate,
+            dateOfVisit: this.dateOfVisit
         }
         await placeService.createCommentforPlace(this.id,params)
         this.title = null
         this.nick = null
         this.content = null
         this.rate = null
+        this.dateOfVisit = null
        }
     }
   }

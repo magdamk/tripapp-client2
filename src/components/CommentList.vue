@@ -2,10 +2,8 @@
 <template lang="pl">
     <div>
     <p><strong>Średnia ocen: </strong><span :class="{'good': average>3, 'bad':average<3, 'neutral':average==3}">{{average}}/5</span></p>
-        
         <div v-for="comment in comments" v-bind:key="comment._id">
             <Comment :comment="comment" />
-           
         </div>
     </div>
 </template>
@@ -20,6 +18,10 @@ export default {
       type: Array,
     },
   },
+  emits:['update-average'],
+  methods(){
+    
+  },
   computed: {
     average() {
       let sum = 0;
@@ -30,20 +32,23 @@ export default {
           sum += arr[i].rate;
           i++;
         }
-        return (sum / this.comments.length).toFixed(0);
-      } else return "Brak opinii";
+        const a = (sum / this.comments.length).toFixed(0)
+         this.$emit('update-average',a)
+        return a;
+      } else {this.$emit('update-average','brak')
+        return "Brak opinii";}
     },
   },
 };
 </script>
 <style scoped>
 .good {
-  background-color: lightgreen;
+  color: green;
 }
 .bad {
-  background-color: red;
+  color: red;
 }
 .neutral {
-  background-color: yellow;
+  color: rgb(255, 230, 0);
 }
 </style>

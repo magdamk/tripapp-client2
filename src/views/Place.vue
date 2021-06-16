@@ -9,7 +9,8 @@
             <p v-if="place.costToVisit"><strong>Koszt: </strong>{{place.costToVisit}} zł</p>
             <p v-else>Za darmo!</p>
             <p ><strong>Czas zwiedzania: </strong>{{place.timeToVisit}} minut</p>
-            <button @click ="revealWeather()"  class="waves-effect waves-light btn" ><i class="material-icons left">cloud</i>Pogoda</button>
+            <p>Średnia ocen: {{average}}</p>
+            <button @click ="revealWeather()"  class="waves-effect waves-light btn" ><i class="material-icons left">wb_sunny</i>Pogoda</button>
                     
                     <div v-if="place.showWeather">
                         <p>Temperatura: {{(weather.data.main.temp-273).toFixed(2)}}&deg;C</p>
@@ -18,10 +19,14 @@
                         <p>Ciśnienie: {{weather.data.main.pressure}} hPa</p>
                         <p style="font-size:10px">Pogoda pochodzi z serwisu <a href="https://openweathermap.org/">https://openweathermap.org/</a></p>
                     </div>   
+            <button @click ="place.showPhotos"  class="waves-effect waves-light btn" ><i class="material-icons left">photo</i>Galeria</button>
+            <div v-show="place.showPhotos">
+              <Photos :place._id="photos"/>
+            </div>
         <button @click ="place.showComments=!place.showComments"  class="waves-effect waves-light btn">Opinie ({{comments.length}})</button>
         <div v-show="place.showComments">
             <CommentForm :id="placeId"/>
-            <CommentList :comments="comments"/>
+            <CommentList :comments="comments" @update-average="updateAverage"/>
         </div>
     </div>
     <div v-else>Nie znaleziono miejsca o takim indeksie.</div>
@@ -36,7 +41,7 @@ export default {
   props: {
     placeId: {
       type: String,
-      required: true,
+      required: true
     },
   },
   components: { CommentList, CommentForm },
@@ -46,8 +51,10 @@ export default {
       place: null,
       showWeather: false,
       showComments: false,
+      showPhotos: false,
       comments: null,
-      weather:null
+      weather:null,
+      average:null
     };
   },
   created() {
@@ -55,6 +62,11 @@ export default {
     this.getCommentsForPlace(this.placeId);
   },
   methods: {
+    updateAverage(a){
+      console.log(a);
+      this.average=a;
+      return this.average
+    },
     async getPlaceById(id) {
       if (id) {
         this.place = await placeService.getPlaceById(id);
@@ -67,7 +79,6 @@ export default {
     },
     async revealWeather() {
       this.place.showWeather = !this.place.showWeather;
-      //let cityName = this.place.city;
       let url = "http://api.openweathermap.org/data/2.5/weather?lat=" + this.place.latitude+"&lon="+this.place.longitude+ "&appid=ce133af21bc2f8dd391c25474fae2b43&lang=pl";
       this.weather = await axios(url)
     },

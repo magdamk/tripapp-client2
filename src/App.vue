@@ -3,7 +3,7 @@
 <template>
   <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo right">Logo</a>
+      <a href="#" class="brand-logo right"><img src="/assets/favicon.svg"/></a>
       <ul id="nav-mobile" class="left">
         <li><router-link :to="{ name: 'Home' }">Home</router-link></li>
         <li>
